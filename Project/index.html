@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+    <title>SnapSage</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        /* @import url('https://fonts.googleapis.com/css2?family=Lato&display=swap'); */
+
+        .navbar::before {
+            content: "";
+            background: url("https://themewagon.github.io/Djoz/img/hero-bg.png");
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100vh;
+            width: 99vw;
+            z-index: -1;
+        }
+
+        .navbar {
+            height: 100px;
+        }
+
+        .bg-transparent {
+            background-color: rgb(67 3 175 / 50%) !important;
+            outline: solid 1px rgb(67 3 175 / 90%) !important;
+
+        }
+
+        .navbar-nav .nav-link {
+            color: white;
+            font-family: 'Lato', sans-serif;
+        }
+
+        .position .flex-column i {
+            transition: scale 0.5s;
+        }
+
+        .position .flex-column i:hover {
+            scale: 1.2;
+            cursor: pointer;
+        }
+
+        .nav-item .nav-link {
+            border-bottom: solid 3px transparent;
+        }
+
+        .nav-item .nav-link {
+            transition: border-bottom 0.8s;
+        }
+
+        .nav-item .nav-link:hover {
+            border-bottom: solid white 3px;
+        }
+
+        .animation h2 {
+            font-size: 3.8rem;
+            font-weight: bolder;
+            font-family: 'Lato', sans-serif
+        }
+
+        @media (max-width: 776px) {
+            .animation h2 {
+                font-size: 3rem !important;
+            }
+
+        }
+
+        @media (max-width: 576px) {
+            .navbar-nav {
+                flex-direction: row !important;
+            }
+
+
+            #social i {
+                font-size: 2.6rem;
+            }
+
+            .fs-5 {
+                font-size: 1.5rem !important;
+            }
+
+            .section-title h2 {
+                font-size: 2.5rem !important;
+                margin-bottom: 5vh;
+            }
+        }
+
+        @media (max-width:350px) {
+            .position {
+                display: none;
+            }
+        }
+
+        @media (max-width: 576px) {
+            /* .animation a {
+                --bs-btn-padding-y: 0.3rem;
+                --bs-btn-padding-x: 0.7rem;
+                --bs-btn-font-size: 0.7rem;
+                --bs-btn-border-radius: var(--bs-border-radius-sm);
+
+            } */
+        }
+
+        #section-2 {
+            height: 83vh;
+            width: 99vw;
+        }
+
+        #card-group {
+            display: flex !important;
+            flex-direction: row !important;
+            overflow: hidden;
+            margin: auto;
+            height: 70vh;
+            width: 81vw;
+            position: relative;
+        }
+
+        .card-group-item {
+            flex: 0 0 25vw;
+            margin: 0px 1vw;
+        }
+
+        @media (max-width: 976px) {
+
+            .card-group-item {
+                flex: 0 0 38vw;
+                margin: 0px 1.5vw;
+            }
+        }
+
+        @media (max-width: 990px) {
+
+            .section-title h2 {
+                margin-bottom: 1.5rem;
+            }
+        }
+
+        @media (max-width: 776px) {
+
+            .card-group-item {
+                flex: 0 0 78vw;
+                margin: 0px 1.5vw;
+            }
+        }
+
+
+        .card-group-item img {
+            height: 80% !important;
+        }
+
+        .card-group-button {
+            position: absolute;
+            height: 6vh;
+            width: 3vw;
+            z-index: 2;
+            top: 40%;
+            border-radius: 50%;
+            background-color: transparent;
+        }
+
+        .card-group-button i {
+            border-radius: 50%;
+            box-shadow: 1px 0px 4px rgb(0, 0, 0);
+        }
+
+        .btn-1 {
+            left: 1vw;
+        }
+
+        .btn-2 {
+            right: 1vw;
+        }
+
+        #M-BOX {
+            position: relative;
+        }
+
+        #M-BOX > div {
+            width: 550px;
+        }
+
+        .progressBar input {
+            width: 175px;
+        }
+
+        @media (max-width: 550px) {
+            #M-BOX h1 {
+                margin-left: 0rem !important;
+            }
+
+            #M-BOX > div {
+                margin-left: 0rem !important;
+                width: 370px;
+            }
+
+            .progressBar input {
+                width: 100px;
+            }
+        }
+
+        #M-BOX div::before {
+            content: "";
+            position: absolute;
+            top: 0px;
+            left: 0px;
+            margin: 0px;
+            padding: 0px;
+            height: 100%;
+            width: 100%;
+            z-index: -2;
+            background: url("Music/bg.jpg");
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+
+        .overflow-auto::-webkit-scrollbar {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div style="display: block;height: 100vh; width: 99vw;">
+
+        <nav class="navbar navbar-expand-sm bg-transparent" style="width: 99vw;">
+            <div class="container">
+                <a class="navbar-brand fs-2 text-light" href="#"><strong>DjSong</strong></a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation"> <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse justify-content-center" id="navbarSupportedContent">
+                    <ul class="navbar-nav">
+                        <li class="nav-item mx-md-4 mx-2">
+                            <a class="nav-link text-light fs-5 active" aria-current="page" href="#">Home</a>
+                        </li>
+                        <li class="nav-item mx-md-4 mx-2">
+                            <a class="nav-link fs-5" href="#">About</a>
+                        </li>
+                        
+                        <li class="nav-item mx-md-4 mx-2">
+                            <a class="nav-link fs-5" href="#">News</a>
+                        </li>
+                        <li class="nav-item mx-md-4 mx-2">
+                            <a class="nav-link fs-5" href="#">Contact</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <div class="row position float-end mt-5" style="margin-right: 10px !important;">
+            <div class="d-inline-flex flex-column" id="social">
+                <i class="fab fa-facebook fa-3x m-2" style="color: white;"></i>
+                <i class="fab fa-instagram fa-3x m-2" style="color: white;"></i>
+                <i class="fab fa-twitter fa-3x m-2" style="color: white;"></i>
+                <i class="fab fa-whatsapp fa-3x m-2" style="color: white;"></i>
+                <i class="fab fa-telegram fa-3x m-2" style="color: white;"></i>
+            </div>
+        </div>
+
+        <div class="container mt-5">
+            <div class="row">
+                <div class="col-xl-7 animation col-lg-9 col-sm-12">
+                    <h2 class="text-light lh-1">
+                        <span class="text-danger">Music</span>
+                        for
+                        everyone.
+                    </h2>
+                    <p class="text-light mt-3 fs-5">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+                        labore
+                        et dolore magna aliqua. Quis ipsum suspendisse ultrices gravida.
+                    </p>
+                    <a href="#" style="border-radius: 25px;" class="btn btn-primary btn-lg  mt-3 btn-danger">Download
+                        Now</a>
+                    <a href="#" style="border-radius: 25px;" class="btn btn-primary btn-lg  mt-3 btn-secondary">Start
+                        free
+                    </a>
+                    <div class="col-xl-5 col-lg-9"></div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+    <div id="section-2">
+        <section class="intro-section spad">
+            <div class="container d-flex align-items-center flex-wrap" style="height: 60vh; width: 100vw;">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="section-title">
+                            <h2 class="lh-1" style="font-size: 4rem;text-align: center;">Unlimited Access to 100K tracks
+                            </h2>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <p class="fs-5">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                            incididunt ut
+                            labore et dolore magna aliqua. Quis ipsum sus-pendisse ultrices gravida. Risus commodo
+                            viverra maecenas accumsan lacus vel facilisis. Lorem ipsum dolor sit amet, consectetur
+                            adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Quis
+                            ipsum suspendisse ultrices gravida.</p>
+                        <a href="#" class="btn btn-danger btn-lg mt-3">Try it now</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <div class="d-flex justify-content-center mb-5 mt-5 align-items-center ">
+        <h1 style="font-size: 2.5rem;">Upcoming Events</h1>
+    </div>
+
+    <div id="card-group">
+        <!-- <button class="card-group-button btn-1"><i class="fas fa-arrow-left"></i></button> -->
+        <div class="card card-group-item">
+            <img src="https://cdn.pixabay.com/photo/2024/01/28/04/59/ai-generated-8537125_640.jpg" class="card-img-top"
+                alt="...">
+            <div class="card-body">
+                <h5 class="card-title">Code title</h5>
+            </div>
+        </div>
+        <div class="card card-group-item">
+            <img src="https://media.istockphoto.com/id/636208094/photo/tropical-jungle.webp?b=1&s=612x612&w=0&k=20&c=uAdf2mihBajlQY6UeoLETauoY4afxC-BYH-tBk60cBo="
+                class="card-img-top" alt="...">
+            <div class="card-body">
+                <h5 class="card-title">Card title</h5>
+            </div>
+        </div>
+        <div class="card card-group-item">
+            <img src="https://cdn.pixabay.com/photo/2024/01/28/10/18/mountains-8537302_640.jpg" class="card-img-top"
+                alt="...">
+            <div class="card-body">
+                <h5 class="card-title">Card title</h5>
+            </div>
+        </div>
+        <div class="card card-group-item" style="transform: translate(50px);">
+            <img src="https://cdn.pixabay.com/photo/2024/01/27/14/06/siberian-tiger-8536106_640.jpg"
+                class="card-img-top" alt="...">
+            <div class="card-body">
+                <h5 class="card-title">Card title</h5>
+            </div>
+        </div>
+        <div class="card card-group-item">
+            <img src="https://cdn.pixabay.com/photo/2024/01/28/17/25/ai-generated-8537974_640.jpg" class="card-img-top"
+                alt="...">
+            <div class="card-body">
+                <h5 class="card-title">Card title</h5>
+            </div>
+        </div>
+        <div class="card card-group-item">
+            <img src="https://cdn.pixabay.com/photo/2024/01/28/04/59/ai-generated-8537125_640.jpg" class="card-img-top"
+                alt="...">
+            <div class="card-body">
+                <h5 class="card-title">Code title</h5>
+            </div>
+        </div>
+        <div class="card card-group-item">
+            <img src="https://media.istockphoto.com/id/636208094/photo/tropical-jungle.webp?b=1&s=612x612&w=0&k=20&c=uAdf2mihBajlQY6UeoLETauoY4afxC-BYH-tBk60cBo="
+                class="card-img-top" alt="...">
+            <div class="card-body">
+                <h5 class="card-title">Card title</h5>
+            </div>
+        </div>
+        <div class="card card-group-item">
+            <img src="https://cdn.pixabay.com/photo/2024/01/28/10/18/mountains-8537302_640.jpg" class="card-img-top"
+                alt="...">
+            <div class="card-body">
+                <h5 class="card-title">Card title</h5>
+            </div>
+        </div>
+        <!-- <button class="card-group-button btn-2"><i class="fas fa-arrow-right"></i></button> -->
+
+    </div>
+
+    <div class="container-fluid" style="height: 90vh; margin-top: 10rem;" id="M-BOX">
+        <h1 class="text-light" style="margin-left: 3rem;">LATEST TRACKS</h1>
+        <div class="overflow-auto container mt-5 float-start" style="height: 73vh;margin-left:3rem;">
+            <div class="Music-item row mb-3">
+                <h4 class="mb-3 text-light">DAVID GUETTA MIAMI ULTRA</h4>
+                <div class="Music d-flex w-100 col-lg-6 justify-content-between align-items-center">
+                    <i class="fas fa-1x fa-play playButton" style="color: purple;"></i>
+                    <div class="d-flex align-items-center progressBar">
+                        <span class="text-light me-2">00:00</span>
+                        <input type="range" class="web" id="" min="0" value="0" class="mx-2" style="height: 4px;">
+                        <span class="text-light ms-2">03:50</span>
+                    </div>
+                    <div class="d-flex align-items-center">
+                        <i class="fas fa-volume-up me-2 text-light"></i>
+                        <input type="range" class="web" min="0" max="10" style="width: 70px;height: 4px;" value="8"
+                            id="">
+                    </div>
+                </div>
+                <div>
+                    <img src="Music/playing.gif" class="mt-2 ms-5"
+                        style="width: 50px;opacity: 0;transition: 0.5s; height: 20px;visibility: hidden;" alt="">
+                </div>
+            </div>
+            <div class="Music-item row mb-3">
+                <h4 class="mb-3 text-light">DAVID GUETTA MIAMI ULTRA</h4>
+                <div class="Music d-flex w-100 col-lg-6 justify-content-between align-items-center">
+                    <i class="fas fa-1x fa-play playButton" style="color: purple;"></i>
+                    <div class="d-flex align-items-center progressBar">
+                        <span class="text-light me-2">00:00</span>
+                        <input type="range" class="web" id="" min="0" value="0" class="mx-2" style="height: 4px;">
+                        <span class="text-light ms-2">02:23</span>
+                    </div>
+                    <div class="d-flex align-items-center">
+                        <i class="fas fa-volume-up me-2 ms-2 text-light"></i>
+                        <input type="range" class="web" min="0" max="10" style="width: 70px;height: 4px;" value="8"
+                            id="">
+                    </div>
+                </div>
+                <div>
+                    <img src="Music/playing.gif" class="mt-2 ms-5"
+                        style="width: 50px;opacity: 0;transition: 0.5s; height: 20px;visibility: hidden;" alt="">
+                </div>
+            </div>
+            <div class="Music-item row mb-3">
+                <h4 class="mb-3 text-light">DAVID GUETTA MIAMI ULTRA</h4>
+                <div class="Music d-flex w-100 col-lg-6 justify-content-between align-items-center">
+                    <i class="fas fa-1x fa-play playButton" style="color: purple;"></i>
+                    <div class="d-flex align-items-center progressBar">
+                        <span class="text-light me-2">00:00</span>
+                        <input type="range" class="web" id="" min="0" value="0" class="mx-2" style="height: 4px;">
+                        <span class="text-light ms-2">2:56</span>
+                    </div>
+                    <div class="d-flex align-items-center">
+                        <i class="fas fa-volume-up me-2 text-light"></i>
+                        <input type="range" class="web" min="0" max="10" style="width: 70px;height: 4px;" value="8"
+                            id="">
+                    </div>
+                </div>
+                <div>
+                    <img src="Music/playing.gif" class="mt-2 ms-5"
+                        style="width: 50px;opacity: 0;transition: 0.5s; height: 20px;visibility: hidden;" alt="">
+                </div>
+            </div>
+            <div class="Music-item row mb-3">
+                <h4 class="mb-3 text-light">DAVID GUETTA MIAMI ULTRA</h4>
+                <div class="Music d-flex w-100 col-lg-6 justify-content-between align-items-center">
+                    <i class="fas fa-1x fa-play playButton" style="color: purple;"></i>
+                    <div class="d-flex align-items-center progressBar">
+                        <span class="text-light me-2">00:00</span>
+                        <input type="range" class="web" id="" min="0" value="0" class="mx-2" style="height: 4px;">
+                        <span class="text-light ms-2">2:56</span>
+                    </div>
+                    <div class="d-flex align-items-center">
+                        <i class="fas fa-volume-up me-2 text-light"></i>
+                        <input type="range" class="web" min="0" max="10" style="width: 70px;height: 4px;" value="8"
+                            id="">
+                    </div>
+                </div>
+                <div>
+                    <img src="Music/playing.gif" class="mt-2 ms-5"
+                        style="width: 50px;opacity: 0;transition: 0.5s; height: 20px;visibility: hidden;" alt="">
+                </div>
+            </div>
+            <div class="Music-item row mb-3">
+                <h4 class="mb-3 text-light">DAVID GUETTA MIAMI ULTRA</h4>
+                <div class="Music d-flex w-100 col-lg-6 justify-content-between align-items-center">
+                    <i class="fas fa-1x fa-play playButton" style="color: purple;"></i>
+                    <div class="d-flex align-items-center progressBar">
+                        <span class="text-light me-2">00:00</span>
+                        <input type="range" class="web" id="" min="0" value="0" class="mx-2" style="height: 4px;">
+                        <span class="text-light ms-2">2:56</span>
+                    </div>
+                    <div class="d-flex align-items-center">
+                        <i class="fas fa-volume-up me-2 text-light"></i>
+                        <input type="range" class="web" min="0" max="10" style="width: 70px;height: 4px;" value="8"
+                            id="">
+                    </div>
+                </div>
+                <div>
+                    <img src="Music/playing.gif" class="mt-2 ms-5"
+                        style="width: 50px;opacity: 0;transition: 0.5s; height: 20px;visibility: hidden;" alt="">
+                </div>
+            </div>
+            <div class="Music-item row mb-3">
+                <h4 class="mb-3 text-light">DAVID GUETTA MIAMI ULTRA</h4>
+                <div class="Music d-flex w-100 col-lg-6 justify-content-between align-items-center">
+                    <i class="fas fa-1x fa-play playButton" style="color: purple;"></i>
+                    <div class="d-flex align-items-center progressBar">
+                        <span class="text-light me-2">00:00</span>
+                        <input type="range" class="web" id="" min="0" value="0" class="mx-2" style="height: 4px;">
+                        <span class="text-light ms-2">2:56</span>
+                    </div>
+                    <div class="d-flex align-items-center">
+                        <i class="fas fa-volume-up me-2 text-light"></i>
+                        <input type="range" class="web" min="0" max="10" style="width: 70px;height: 4px;" value="8"
+                            id="">
+                    </div>
+                </div>
+                <div>
+                    <img src="Music/playing.gif" class="mt-2 ms-5"
+                        style="width: 50px;opacity: 0;transition: 0.5s; height: 20px;visibility: hidden;" alt="">
+                </div>
+            </div>
+            <div class="Music-item row mb-3">
+                <h4 class="mb-3 text-light">DAVID GUETTA MIAMI ULTRA</h4>
+                <div class="Music d-flex w-100 col-lg-6 justify-content-between align-items-center">
+                    <i class="fas fa-1x fa-play playButton" style="color: purple;"></i>
+                    <div class="d-flex align-items-center progressBar">
+                        <span class="text-light me-2">00:00</span>
+                        <input type="range" class="web" id="" min="0" value="0" class="mx-2" style="height: 4px;">
+                        <span class="text-light ms-2">2:56</span>
+                    </div>
+                    <div class="d-flex align-items-center">
+                        <i class="fas fa-volume-up me-2 text-light"></i>
+                        <input type="range" class="web" min="0" max="10" style="width: 70px;height: 4px;" value="8"
+                            id="">
+                    </div>
+                </div>
+                <div>
+                    <img src="Music/playing.gif" class="mt-2 ms-5"
+                        style="width: 50px;opacity: 0;transition: 0.5s; height: 20px;visibility: hidden;" alt="">
+                </div>
+            </div>
+            <div class="Music-item row mb-3">
+                <h4 class="mb-3 text-light">DAVID GUETTA MIAMI ULTRA</h4>
+                <div class="Music d-flex w-100 col-lg-6 justify-content-between align-items-center">
+                    <i class="fas fa-1x fa-play playButton" style="color: purple;"></i>
+                    <div class="d-flex align-items-center progressBar">
+                        <span class="text-light me-2">00:00</span>
+                        <input type="range" class="web" id="" min="0" value="0" class="mx-2" style="height: 4px;">
+                        <span class="text-light ms-2">2:56</span>
+                    </div>
+                    <div class="d-flex align-items-center">
+                        <i class="fas fa-volume-up me-2 text-light"></i>
+                        <input type="range" class="web" min="0" max="10" style="width: 70px;height: 4px;" value="8"
+                            id="">
+                    </div>
+                </div>
+                <div>
+                    <img src="Music/playing.gif" class="mt-2 ms-5"
+                        style="width: 50px;opacity: 0;transition: 0.5s; height: 20px;visibility: hidden;" alt="">
+                </div>
+            </div>
+            <div class="Music-item row mb-3">
+                <h4 class="mb-3 text-light">DAVID GUETTA MIAMI ULTRA</h4>
+                <div class="Music d-flex w-100 col-lg-6 justify-content-between align-items-center">
+                    <i class="fas fa-1x fa-play playButton" style="color: purple;"></i>
+                    <div class="d-flex align-items-center progressBar">
+                        <span class="text-light me-2">00:00</span>
+                        <input type="range" class="web" id="" min="0" value="0" class="mx-2" style="height: 4px;">
+                        <span class="text-light ms-2">2:56</span>
+                    </div>
+                    <div class="d-flex align-items-center">
+                        <i class="fas fa-volume-up me-2 text-light"></i>
+                        <input type="range" class="web" min="0" max="10" style="width: 70px;height: 4px;" value="8"
+                            id="">
+                    </div>
+                </div>
+                <div>
+                    <img src="Music/playing.gif" class="mt-2 ms-5"
+                        style="width: 50px;opacity: 0;transition: 0.5s; height: 20px;visibility: hidden;" alt="">
+                </div>
+            </div>
+            <div class="Music-item row mb-3">
+                <h4 class="mb-3 text-light">DAVID GUETTA MIAMI ULTRA</h4>
+                <div class="Music d-flex w-100 col-lg-6 justify-content-between align-items-center">
+                    <i class="fas fa-1x fa-play playButton" style="color: purple;"></i>
+                    <div class="d-flex align-items-center progressBar">
+                        <span class="text-light me-2">00:00</span>
+                        <input type="range" class="web" id="" min="0" value="0" class="mx-2" style="height: 4px;">
+                        <span class="text-light ms-2">2:56</span>
+                    </div>
+                    <div class="d-flex align-items-center">
+                        <i class="fas fa-volume-up me-2 text-light"></i>
+                        <input type="range" class="web" min="0" max="10" style="width: 70px;height: 4px;" value="8"
+                            id="">
+                    </div>
+                </div>
+                <div>
+                    <img src="Music/playing.gif" class="mt-2 ms-5"
+                        style="width: 50px;opacity: 0;transition: 0.5s; height: 20px;visibility: hidden;" alt="">
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <script src="https://kit.fontawesome.com/26504e4a1f.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script src="7.js"></script>
+    <script src="slide.js"></script>
+    <script src="music.js"></script>
+    <!-- <script src="num.js"></script> -->
+</body>
+
+</html>
